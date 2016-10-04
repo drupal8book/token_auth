@@ -1,0 +1,12 @@
+token_auth.auth_token.*:
+  type: config_entity
+  label: 'Authentication Token config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string

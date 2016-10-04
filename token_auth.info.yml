@@ -1,0 +1,5 @@
+name: Token Authentication
+type: module
+description: Token based custom authenticator
+core: 8.x
+package: Examples

@@ -1,0 +1,8 @@
+# Authentication Token menu items definition
+entity.auth_token.collection:
+  title: 'Authentication Token'
+  route_name: entity.auth_token.collection
+  description: 'List Authentication Token (bundles)'
+  parent: system.admin_structure
+  weight: 99
+

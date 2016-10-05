@@ -1,0 +1,7 @@
+services:
+  authentication.token_auth:
+    class: Drupal\token_auth\Authentication\Provider\TokenAuth
+    arguments: ['@session_configuration', '@database']
+    tags:
+      - { name: authentication_provider, provider_id: token_auth, priority: 100 }
+

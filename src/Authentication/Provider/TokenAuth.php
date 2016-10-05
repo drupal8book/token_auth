@@ -28,20 +28,7 @@ class TokenAuth extends Cookie implements AuthenticationProviderInterface {
    */
   public function applies(Request $request) {
     $token = $request->query->get('token');
-    return parent::applies($request) && isset($token);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function authenticate(Request $request) {
-    $token = $request->query->get('token');
-    if ($token == 'XYZ') {
-      return parent::authenticate($request);
-    }
-    else {
-      throw new AccessDeniedHttpException();
-    }
+    return parent::applies($request) && ($token == 'XYZ');
   }
 
   /**

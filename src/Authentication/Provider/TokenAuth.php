@@ -28,7 +28,7 @@ class TokenAuth extends Cookie implements AuthenticationProviderInterface {
    */
   public function applies(Request $request) {
     $token = $request->query->get('token');
-    return parent::applies($request) && ($token == 'XYZ');
+    return parent::applies($request) && $this->isCorrectToken($token);
   }
 
   /**
@@ -50,4 +50,16 @@ class TokenAuth extends Cookie implements AuthenticationProviderInterface {
     return FALSE;
   }
 
+  protected function isCorrectToken($tok) {
+    $query = \Drupal::entityQuery('auth_token')
+      ->condition('enabled', TRUE);
+    $token_ids = $query->execute();
+    $tokens = entity_load_multiple('auth_token', $token_ids);
+    foreach($tokens as $token) {
+      if($token->token() == $tok) {
+        return TRUE;
+      }
+    }
+    return FALSE;
+  }
 }

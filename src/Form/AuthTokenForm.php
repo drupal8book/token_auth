@@ -29,11 +29,11 @@ class AuthTokenForm extends EntityForm {
       '#required' => TRUE,
     ];
 
-    $form['token'] = [
-      '#type' => 'textfield',
-      '#default_value' => $auth_token->isNew()?"foo":$auth_token->token(),
-      '#disabled' => TRUE,
-    ];
+    if(!$auth_token->isNew()) {
+      $form['token'] = [
+        '#markup' => $auth_token->token(),
+      ];
+    }
 
     $form['id'] = [
       '#type' => 'machine_name',
@@ -59,6 +59,9 @@ class AuthTokenForm extends EntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $auth_token = $this->entity;
+    if($auth_token->isNew()) {
+      $auth_token->set("token", Crypt::randomBytesBase64());
+    }
     $status = $auth_token->save();
 
     switch ($status) {

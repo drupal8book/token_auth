@@ -10,3 +10,9 @@ token_auth.auth_token.*:
       label: 'Label'
     uuid:
       type: string
+    token:
+      type: string
+      label: 'Auth Token'
+    enabled:
+      type: boolean
+      label: 'Enabled'
